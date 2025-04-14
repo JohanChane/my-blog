@@ -24,7 +24,7 @@ for example:
 echo "obase=2; 123456" | bc
 ```
 
-```txt
+```
 output: 11110001001000000
      => 0000111 1000100 1000000             # 7 位为组。大端序。
      => 1000000 1000100 0000111             # 现在内存一般是小端序。
@@ -198,7 +198,7 @@ int main() {
 
 output:
 
-```txt
+```
 --- variant ---
 # ## Original value
 Decimal value: 123456
