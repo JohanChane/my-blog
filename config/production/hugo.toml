@@ -1,0 +1,4 @@
+title = "Johan Chane's Blog"
+baseURL = "https://johanchane.github.io/my-blog"
+defaultContentLanguage = "zh-cn"
+languageCode = "zh-CN"
