@@ -12,7 +12,8 @@ description = "This is JohanChane's blog"
   svgFavicon = "favicon.png"
 [header.title]
   # URL of the LOGO
-  logo = "favicon.png"
+  #logo = "favicon.png"
+  logo = "https://github.com/JohanChane/my-blog/blob/main/static/favicon.png?raw=true"  # 这是必须要用 URL
 # Home page profile
 [home.profile]
   # subtitle shown in home page (HTML format is supported)
