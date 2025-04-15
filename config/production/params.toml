@@ -22,9 +22,6 @@ description = "This is JohanChane's blog"
 [social]
   GitHub = "johanchane"
   RSS = false
-[page.toc]
-  # FixIt 0.2.13 | NEW position of TOC ["left", "right"]
-  position = "left"
 [page.comment]
   enable = true
   # FixIt 0.2.14 | NEW Giscus comments config
