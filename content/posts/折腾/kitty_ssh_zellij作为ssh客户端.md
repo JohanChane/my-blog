@@ -51,3 +51,13 @@ zellij attach <the_session>
 ## 上传/下载文件
 
 在本地使用 `scp/rsync` 即可。
+
+## 常见错误
+
+-   [I get errors about the terminal being unknown or opening the terminal failing or functional keys like arrow keys don’t work?](https://sw.kovidgoyal.net/kitty/faq/#i-get-errors-about-the-terminal-being-unknown-or-opening-the-terminal-failing-or-functional-keys-like-arrow-keys-don-t-work)
+
+    ```sh
+    使用 kitten ssh <host_name>
+    # 如果还不行, 则
+    infocmp -a xterm-kitty | ssh <host_name> tic -x -o \~/.terminfo /dev/stdin    # 会生成 ~/.terminfo/x/xterm-kitty
+    ```

@@ -23,40 +23,55 @@ ssh-copy-id <username>@<server_ip>
 cat ~/.ssh/<file_name>.pub | ssh <username>@<server_ip> "mkdir -p ~/.ssh && chmod 700 ~/.ssh && cat >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys"
 ```
 
+```sh
+# 登录测试 (不要退出, 防止接下来配置出错否无法登录服务器)
+ssh -i <key_file> -p <port> <user>@<host_name>
+```
+
 ## 修改 sshd 的配置
 
 `/etc/ssh/sshd_config` (找到并修改以下参数)：
 
 ```
-PasswordAuthentication no               # 禁用密码认证
-PubkeyAuthentication yes                # 启用公钥认证
-ChallengeResponseAuthentication no      # 避免不必要的认证方式，简化安全配置。
-UsePAM no                               # 禁用后，SSH 直接依赖自身的认证机制（如密钥）。
-```
-
-可选增强安全措施:
-
-```
-# 禁用root登录
-PermitRootLogin no
-
-# 限制允许的用户
-AllowUsers <your_username>
-
-# 更改默认端口
+# 取消注释并修改为一个高端口号（如 2022, 2222等）, 为了避开自动化扫描脚本
 Port 2222
+
+# 禁止 root 用户直接登录
+PermitRootLogin no
+# 可选但推荐：禁止使用空密码
+PermitEmptyPasswords no
+
+# 禁用密码认证，强制使用密钥
+PasswordAuthentication no
+
+# 启用公钥认证 (通常默认是启用的，但请确认)
+PubkeyAuthentication yes
+
+# 可选但推荐：配置允许登录的用户或用户组
+# 将 ‘your_user’ 替换为你的实际用户名
+AllowUsers your_user
+# 或者允许一个用户组，例如 ‘ssh-users’
+# AllowGroups ssh-users
+```
+
+防火墙开放端口:
+
+```sh
+sudo ufw allow 2222
 ```
 
 ## 重启SSH服务
 
 ```bash
-sudo systemctl restart sshd
+sudo systemctl restart sshd   # 之前的连接不会中断
 ```
 
 ## 配置 ssh
 
 ```
 Host <ip/host_name>
+    #HostName <host_name>    # 真实 ip/host_name
+    Port <port>
     User <user_name>
     IdentityFile ~/.ssh/<file_name>
 ```
