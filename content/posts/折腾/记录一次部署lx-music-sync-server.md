@@ -30,6 +30,21 @@ npm ci
 npm run build
 ```
 
+## pm2
+
+```sh
+npm i -g pm2
+
+cd ~/Workspace/lx-music-sync-server
+
+pm2 restart lx-music-sync-server  # 重启服务
+pm2 logs
+
+# lx-music-sync-server 服务开机启动
+pm2 save
+pm2 startup
+```
+
 ### 测试
 
 config.js:
