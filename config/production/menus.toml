@@ -47,3 +47,14 @@
   weight = 3
   [main.params]
     icon = "fa-solid fa-tags"
+[[main]]
+  identifier = "projects"
+  parent = ""
+  pre = ""
+  post = ""
+  name = "Projects"
+  url = "/projects/projects.md"
+  title = ""
+  weight = 4
+  [main.params]
+    icon = "fa-solid fa-diagram-project"
