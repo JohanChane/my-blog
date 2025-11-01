@@ -53,7 +53,7 @@
   pre = ""
   post = ""
   name = "Projects"
-  url = "/projects/projects.md"
+  url = "/projects/"
   title = ""
   weight = 4
   [main.params]
