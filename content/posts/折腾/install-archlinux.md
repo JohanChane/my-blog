@@ -136,6 +136,69 @@ pacman -S paru
 -   [Nouveau - Arch Linux 中文维基](https://wiki.archlinuxcn.org/wiki/Nouveau)
 -   [NVIDIA - Arch Linux 中文维基](https://wiki.archlinuxcn.org/wiki/NVIDIA)
 
+### 安装闭源驱动
+
+```sh
+paru -S nvidia-open nvidia-utils lib32-nvidia-utils
+```
+
+将 kms 从 /etc/mkinitcpio.conf 里的HOOKS 数组中移除。
+
+查看使用 GPU 的进程:
+
+```sh
+nvidia-smi
+```
+
+#### wayland
+
+DRM 内核级显示模式设置:
+
+
+```sh
+cat /sys/module/nvidia_drm/parameters/modeset
+```
+
+### 安装开源驱动
+
+```sh
+paru -S mesa lib32-mesa xf86-video-nouveau vulkan-nouveau vulkan-tools
+```
+
+/etc/mkinitcpio.conf:
+
+```
+MODULES="... nouveau ..."
+```
+
+重新生成初始ramdisk映像:
+
+```sh
+mkinitcpio -p
+```
+
+/etc/default/grub:
+
+```
+GRUB_CMDLINE_LINUX_DEFAULT="... nouveau.config=NvGspRm=1"
+```
+
+```sh
+grub-mkconfig -o /boot/grub/grub.cfg
+```
+
+显示系统中的 NVIDIA GPU 正在使用 NVK 驱动程序:
+
+```sh
+vulkaninfo
+```
+
+查找使用DRI设备的进程:
+
+```sh
+lsof /dev/dri/*
+```
+
 ### 查看进程在使用哪个显卡驱动 (检测是否安装成功)
 
 ```sh
