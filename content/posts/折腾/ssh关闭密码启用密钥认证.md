@@ -14,7 +14,7 @@ ssh-keygen -t ed25519 -f ~/.ssh/<file_name>
 ## 将公钥上传到服务器
 
 ```sh
-ssh-copy-id <username>@<server_ip>
+ssh-copy-id -i <pub_path> <username>@<server_ip>
 ```
 
 如果没有`ssh-copy-id`命令，可以手动操作：
@@ -26,6 +26,10 @@ cat ~/.ssh/<file_name>.pub | ssh <username>@<server_ip> "mkdir -p ~/.ssh && chmo
 ```sh
 # 登录测试 (不要退出, 防止接下来配置出错否无法登录服务器)
 ssh -i <key_file> -p <port> <user>@<host_name>
+# 查看 ssh 的连接
+ssh -O check <user>@<host_name>
+# 结束 ssh 的连接
+ssh -O exit <user>@<host_name>
 ```
 
 ## 修改 sshd 的配置
@@ -36,13 +40,12 @@ ssh -i <key_file> -p <port> <user>@<host_name>
 # 取消注释并修改为一个高端口号（如 2022, 2222等）, 为了避开自动化扫描脚本
 Port 2222
 
-# 禁止 root 用户直接登录
-PermitRootLogin no
-# 可选但推荐：禁止使用空密码
+# To disable tunneled clear text passwords, change to no here!
+PasswordAuthentication no
 PermitEmptyPasswords no
 
-# 禁用密码认证，强制使用密钥
-PasswordAuthentication no
+# 禁止 root 用户直接登录
+PermitRootLogin no
 
 # 启用公钥认证 (通常默认是启用的，但请确认)
 PubkeyAuthentication yes
