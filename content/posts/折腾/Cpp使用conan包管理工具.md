@@ -163,7 +163,7 @@ cmake --preset conan-debug
 cmake --build --preset conan-debug -j16
 ```
 
-上面的编译, 编译出来的第三库也是 debug 版本的。有些时候如何机器存储比较小或者需要 adb 部署程序时, 是不适合的。<br/>
+上面的编译, 编译出来的第三库也是 debug 版本的。有些时候如果机器存储比较小或者需要 adb 部署程序 (文件太大时, 部署会比较慢) 时, 是不适合的。<br/>
 所以可以选择将第三方程序编译成 release 版本, 而自己的项目编译成 debug 版本:
 
 ```sh
