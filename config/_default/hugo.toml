@@ -10,7 +10,7 @@ theme = [
   "shortcode-docs-bookmark"
 ]
 defaultContentLanguage = "en"
-languageCode = "en"
+locale = "en"
 hasCJKLanguage = true
 enableRobotsTXT = true
 enableEmoji = true
