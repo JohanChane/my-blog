@@ -14,7 +14,7 @@ ssh-keygen -t ed25519 -f ~/.ssh/<file_name>
 ## 将公钥上传到服务器
 
 ```sh
-ssh-copy-id -i <pub_path> <username>@<server_ip>
+ssh-copy-id -i <pub_path> -p <port> <username>@<server_ip>      # 使用密码的方式上传公钥
 ```
 
 如果没有`ssh-copy-id`命令，可以手动操作：
@@ -25,7 +25,7 @@ cat ~/.ssh/<file_name>.pub | ssh <username>@<server_ip> "mkdir -p ~/.ssh && chmo
 
 ```sh
 # 登录测试 (不要退出, 防止接下来配置出错否无法登录服务器)
-ssh -i <key_file> -p <port> <user>@<host_name>
+ssh -i <key_path> -p <port> <user>@<host_name>
 # 查看 ssh 的连接
 ssh -O check <user>@<host_name>
 # 结束 ssh 的连接

@@ -48,27 +48,23 @@ Host github.com
 ssh config:
 
 ```
-Host github.com
+#git config --global url."git@github-foo.com:foo/".insteadOf "git@github.com:foo/" 
+#git config --global url."git@github-bar.com:bar/".insteadOf "git@github.com:bar/" 
+Host github-foo.com
   HostName ssh.github.com
   Port 443
   User git
-  IdentityFile ~/.ssh/github
+  IdentityFile ~/.ssh/github-foo
 
-Host github.com-<the other user name>
+Host github-bar.com
   HostName ssh.github.com
   Port 443
   User git
-  IdentityFile ~/.ssh/github-joshua
-```
-
-clone:
-
-```sh
-git clone git@github.com:xxx/xxx.git
-git clone git@github.com-<the other user name>:xxx/xxx.git
+  IdentityFile ~/.ssh/github-bar
 ```
 
 ## 参考
 
 -   [通过 SSH 连接到 GitHub](https://docs.github.com/zh/authentication/connecting-to-github-with-ssh)
 -   [启用通过 HTTPS 的 SSH 连接](https://docs.github.com/zh/authentication/troubleshooting-ssh/using-ssh-over-the-https-port)
+-   [管理多个帐户](https://docs.github.com/zh/account-and-profile/how-tos/account-management/managing-multiple-accounts)
