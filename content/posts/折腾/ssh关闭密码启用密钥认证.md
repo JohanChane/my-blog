@@ -26,10 +26,8 @@ cat ~/.ssh/<file_name>.pub | ssh <username>@<server_ip> "mkdir -p ~/.ssh && chmo
 ```sh
 # 登录测试 (不要退出, 防止接下来配置出错否无法登录服务器)
 ssh -i <key_path> -p <port> <user>@<host_name>
-# 查看 ssh 的连接
-ssh -O check <user>@<host_name>
-# 结束 ssh 的连接
-ssh -O exit <user>@<host_name>
+ssh -O check <user>@<host_name>   # 查看 ssh 的连接
+ssh -O exit <user>@<host_name>    # 结束 ssh 的连接
 ```
 
 ## 修改 sshd 的配置
@@ -49,12 +47,6 @@ PermitRootLogin no
 
 # 启用公钥认证 (通常默认是启用的，但请确认)
 PubkeyAuthentication yes
-
-# 可选但推荐：配置允许登录的用户或用户组
-# 将 ‘your_user’ 替换为你的实际用户名
-AllowUsers your_user
-# 或者允许一个用户组，例如 ‘ssh-users’
-# AllowGroups ssh-users
 ```
 
 防火墙开放端口:
@@ -84,7 +76,7 @@ Host <ip/host_name>
 **先不要关闭当前会话**，新开一个终端测试连接：
 
 ```bash
-ssh <username>@<server_ip>
+ssh -i <key_path> -p <port> <user>@<host_name>
 ```
 
 确认可以正常登录后，再关闭当前会话。
