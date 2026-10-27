@@ -1,6 +1,8 @@
 description = "This is JohanChane's blog"
 
 # Author Configuration
+keywords = ["Hugo", "FixIt"]
+
 [author]
   name = "JohanChane"
   email = ""
@@ -9,7 +11,14 @@ description = "This is JohanChane's blog"
 
 [app]
   # modern SVG favicon to use in place of older style .png and .ico files
-  svgFavicon = "favicon.png"
+  svg_favicon = "https://johanchane.github.io/my-blog/favicon.png"
+  mask_color = "#5bbad5"
+  tile_color = "#da532c"
+name = "Johan Chane's Blog"
+
+[app.theme_color]
+    light = "#f8f8f8"
+    dark = "#252627"
 [header.title]
   # URL of the LOGO
   #logo = "favicon.png"
@@ -19,26 +28,108 @@ description = "This is JohanChane's blog"
   # subtitle shown in home page (HTML format is supported)
   subtitle = "This is my blog"
 # FixIt 0.2.16 | CHANGED Social config about the author
+enable = true
+gravatar_email = ""
 [social]
   GitHub = "johanchane"
   RSS = false
-[page.comment]
+
+[comment]
   enable = true
   # FixIt 0.2.14 | NEW Giscus comments config
-  [page.comment.giscus]
+  [comment.giscus]
     enable = true
     repo = "JohanChane/my-blog"
-    repoId = "R_kgDOOYN21w"
+    repo_id = "R_kgDOOYN21w"
     category = "Announcements"
-    categoryId = "DIC_kwDOOYN2184CpEo7"
+    category_id = "DIC_kwDOOYN2184CpEo7"
     mapping = "pathname"
     origin = "https://giscus.app" # FixIt NEW | 0.3.7 Or set it to your self-hosted domain
     strict = "0" # FixIt NEW | 0.2.18
     term = ""
-    reactionsEnabled = "1"
-    emitMetadata = "0"
-    inputPosition = "top" # ["top", "bottom"]
+    reactions_enabled = "1"
+    emit_metadata = "0"
+    input_position = "top" # ["top", "bottom"]
     lang = "zh-CN"
-    lightTheme = "light"
-    darkTheme = "dark"
-    lazyLoad = true
+    light_theme = "light"
+    dark_theme = "dark"
+    lazy_load = true
+
+[link]
+external_icon = false
+
+[breadcrumb]
+sticky = false
+
+[footer]
+  since = 2021
+  license = '<a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>'
+
+[footer.powered]
+hugo_logo = true
+theme_logo = true
+
+[gravatar]
+enable = true
+
+[custom_partials]
+  head = [
+    "inject/fixit-docs-bookmark.html",
+  ]
+
+[codeblock]
+wrapper = true
+copyable = true
+editable = true
+    max_shown_lines = 10
+
+[math]
+enable = true
+type = "katex"
+
+[math.katex]
+copy_tex = true
+# Hugo transform.ToMath includes mhchem (\ce and \pu); no separate plugin flag is needed.
+
+[toc]
+enable = true
+keep_static = false
+auto = true
+ordered = false
+    start_level = 2
+    end_level = 6
+position = "end"
+
+[search]
+  enable = true
+  # type of search engine ["algolia", "fuse"]
+  type = "fuse"
+  # max index length of the chunked content
+  content_length = 4000
+  # placeholder of the search bar
+  placeholder = ""
+  # max number of results length
+  max_result_length = 10
+  # snippet length of the result
+  snippet_length = 30
+  # HTML tag name of the highlight part in results
+  highlight_tag = "em"
+  # whether to use the absolute URL based on the baseURL in search index
+  absolute_url = false
+  [search.algolia]
+    index = ""
+    app_id = ""
+    search_key = ""
+  [search.fuse]
+    # FixIt 0.2.17 | NEW https://fusejs.io/api/options.html
+    is_case_sensitive = false
+    min_match_char_length = 2
+    find_all_matches = false
+    location = 0
+    threshold = 0.3
+    distance = 100
+    ignore_location = false
+    use_extended_search = false
+    ignore_field_norm = false
+
+# Header config

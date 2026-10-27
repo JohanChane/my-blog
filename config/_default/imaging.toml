@@ -1,0 +1,16 @@
+# -------------------------------------------------------------------------------------
+# Imaging Configuration
+# See: https://gohugo.io/configuration/imaging/
+# -------------------------------------------------------------------------------------
+
+# Override the theme's deprecated global quality with per-format settings.
+_merge = "none"
+
+[jpeg]
+quality = 75
+
+[webp]
+quality = 75
+
+[avif]
+quality = 75

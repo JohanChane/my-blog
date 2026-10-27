@@ -2,3 +2,13 @@ title = "Johan Chane's Blog"
 baseURL = "https://johanchane.github.io/my-blog"
 defaultContentLanguage = "zh-cn"
 locale = "zh-CN"
+theme = [
+  "FixIt",
+  "shortcode-docs-bookmark"
+]
+label = "简体中文"
+hasCJKLanguage = true
+relativeURLs = false
+buildDrafts = false
+summaryLength = 150
+ignoreLogs = ["error-get-remote-json"]

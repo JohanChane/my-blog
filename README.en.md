@@ -1,120 +1,72 @@
-# Hugo FixIt Blog Template (Git)
+# Johan Chane's Blog
 
-👉 English | [简体中文](README.md)
+[Website](https://johanchane.github.io/my-blog/) · [简体中文](README.md)
 
-This is a quick start template for Hugo theme [FixIt](https://github.com/hugo-fixit/FixIt). It uses [Git submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules) feature to load the theme. If you favor Go more, you can [check this template](https://github.com/hugo-fixit/hugo-fixit-starter).
+A Chinese technical blog based on [Hugo FixIt starter1](https://github.com/hugo-fixit/hugo-fixit-starter1), with themes managed as Git submodules.
 
-It comes with a basic theme structure and configuration. GitHub action has been set up to deploy the blog to a public GitHub page automatically. Also, there's a cron job to update the theme automatically everyday.
+## Migration baseline
 
-## Directory structure
+Updated against the upstream template and theme on 2026-10-28. FixIt is currently a v1 prerelease. Submodules are pinned to these revisions:
 
-```bash
-▸ .github/       # GitHub configuration
-▸ archetypes/    # page archetypes (like scaffolds of archetypes)
-▸ assets/        # css, js, third-party libraries etc.
-▸ config/        # configuration files
-▸ content/       # markdown files for hugo project
-▸ data/          # blog data (allow: yaml, json, toml), e.g. friends.yml
-▸ public/        # build directory
-▸ static/        # static files, e.g. favicon.ico
-▸ themes/        # theme submodules
-```
+| Component | Pinned revision |
+| --- | --- |
+| starter1 | `0d602a8b75e46f74eca895e352c5e30eaa1b5c60` |
+| FixIt | `v1.0.0-beta.5` / `3f506619006d740b86e3e699012329bd6303ed27` |
+| shortcode-docs-bookmark | `76ed8abf64b706f6d195ebcf7bd744653a983248` |
+| Hugo Extended | `0.168.0` |
+| Dart Sass | `1.106.1` |
 
-## Quick Start
+## Local development
 
-For a complete quick start, see this [page](https://fixit.lruihao.cn/documentation/getting-started/).
-
-### Prerequisites
-
-[Hugo](https://gohugo.io/installation/): >= 0.132.0 (extended version)
-
-### Use this Template
-
-#### CLI
+Install Git, Hugo Extended, and native Dart Sass. Make `hugo` and `sass` available on PATH. The theme requires Hugo 0.166.0 or newer; use the versions above to match CI.
 
 ```bash
-npx fixit-cli create my-blog
+git submodule update --init --recursive
+hugo server -D --disableFastRender
 ```
 
-#### Manual
-
-1. Click [**Use this template**](https://github.com/hugo-fixit/hugo-fixit-starter1/generate), and create your repository on GitHub.
-
-    <img width="913" alt="image" src="https://github.com/hugo-fixit/hugo-fixit-starter1/assets/33419593/d5fbd940-3ffd-4750-b1e6-4e87b50b0696">
-
-2. Once the repository is created, just clone and enjoy it!
-
-    ```bash
-    # Clone with your own repository url
-    git clone --recursive https://github.com/<your_name>/<your_blog_repo>.git
-    ```
-
-> [!TIP]
-> The repository name determines your GitHub Pages URL, for example:
->
-> | Repository Name | GitHub Pages |
-> | :--- | :--- |
-> | `<your_name>.github.io` | `https://<your_name>.github.io/` |
-> | `blog` | `https://<your_name>.github.io/blog/` |
-
-### Launching the Site
+Open `http://localhost:1313/my-blog/`. The `-D` flag includes drafts locally; production builds exclude them.
 
 ```bash
-# Development environment
-hugo server
-# Production environment
-hugo server -e production
+hugo new content posts/my-post.md
+hugo --gc --minify --logLevel info
 ```
 
-### Build the Site
+## Configuration
 
-When your site is ready to deploy, run the following command:
+- `content/`: posts and the Projects page.
+- `config/_default/`: current theme defaults and shared site settings.
+- `config/production/`: public URL, title, author, Giscus, and navigation.
+- `config/development/`: local title, Chinese locale, and icons.
+- `assets/scss/custom.scss`: custom styles. Configure theme variables in `params.appearance`.
+- `static/`: images and other static resources.
+
+Keep the `posts/:slugorcontentbasename` permalink pattern to preserve article URLs and Giscus discussions, which use `pathname` mapping. `social.RSS = false` hides only the social icon; RSS feeds remain enabled.
+
+FixIt v1 uses snake_case theme parameters and changes the comment and code-block configuration structure. Follow the [migration guide](https://fixit.lruihao.cn/guides/upgrade-to-v1/) and retain this site's overrides instead of copying the template author's settings.
+
+## Deployment
+
+Set GitHub Pages Source to **GitHub Actions**. Relevant changes pushed to `main` trigger deployment. **Hugo build and deploy** can also be run manually.
+
+Set the public URL in `config/production/hugo.toml`. The workflow declares `contents: read`, `pages: write`, and `id-token: write`; repository write permission for automatic commits is unnecessary.
+
+## Manual upgrades
+
+The **Update theme** workflow has been removed. Scheduled tasks no longer update the theme or regenerate configuration. Dependabot can still propose dependency PRs for review.
+
+1. Check for uncommitted changes in the site and submodules.
+2. Fetch upstream changes and select a specific tag or commit.
+3. Compare starter1 and theme configuration changes; migrate site overrides.
+4. Verify the production build, article URLs, Chinese text, search, and Giscus.
+5. Review and commit the configuration and submodule pointers. Pushing to `main` publishes the site.
 
 ```bash
-hugo
+git -C themes/FixIt fetch origin --tags
+# Replace TAG_OR_SHA with the reviewed tag or commit.
+git -C themes/FixIt switch --detach TAG_OR_SHA
+hugo --gc --minify --logLevel info
+git diff --submodule=log
 ```
 
-### Deploy to GitHub Pages
-
-> [!NOTE]
-> You may have noticed that the first automatic deployment of GitHub Actions after the template initialization failed. This is because you have not configured Workflow permissions and GitHub Pages.
-
-1. Head to Setting => Actions => General => Workflow permissions => Check "Read and write permissions".
-2. GitHub Pages settings: Setting => Pages => Source: GitHub Actions.
-3. Modify `config/_default/hugo.toml` file `baseURL` to your site URL.
-4. Commit the changes from the previous step to the `main` branch, and GitHub Actions will automatically build and deploy the site to GitHub Pages.
-
-### Update theme
-
-Afterwards you can upgrade the theme with the following command:
-
-```bash
-# Update theme manually
-git submodule update --remote --merge themes/FixIt
-```
-
-<details>
-  <summary>Start via NPM script</summary>
-
-  ```bash
-  npm install
-  # build the blog
-  npm run build
-  # run a local debugging server with watch
-  npm run server
-  # run a local debugging server in production environment
-  npm run server:production
-  # update theme submodules
-  npm run update:theme
-  ```
-
-</details>
-
-## Troubleshooting
-
-<details>
-  <summary>remote: Permission to git denied to github-actions[bot].</summary>
-  Head to Setting => Actions => General => Workflow permissions => Check "Read and write permissions".
-</details>
-
-<!-- This project was generated with [hugo-fixit-starter1](https://github.com/hugo-fixit/hugo-fixit-starter1). -->
+Treat the template and theme as one compatibility migration. Do not downgrade the theme alone while retaining configuration from another version.

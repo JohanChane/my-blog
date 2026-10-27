@@ -11,7 +11,7 @@
   # you can add extra information after the name (HTML format is supported), such as icons
   post = ""
   name = "Archives"
-  url = "/archives/"
+  url = "archives/"
   # title will be shown when you hover on this menu link
   title = ""
   weight = 1
@@ -31,7 +31,7 @@
   pre = ""
   post = ""
   name = "Categories"
-  url = "/categories/"
+  url = "categories/"
   title = ""
   weight = 2
   [main.params]
@@ -42,7 +42,7 @@
   pre = ""
   post = ""
   name = "Tags"
-  url = "/tags/"
+  url = "tags/"
   title = ""
   weight = 3
   [main.params]
@@ -53,7 +53,7 @@
   pre = ""
   post = ""
   name = "Projects"
-  url = "/projects/"
+  url = "projects/"
   title = ""
   weight = 4
   [main.params]
